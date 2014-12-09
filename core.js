@@ -152,31 +152,35 @@ eChat.Core.Templitizer  = function(){
 
 			for(var helperName in template.helpers){
 					
-					var helperCB = template.helpers[helperName];
+					
+					(function(template, helperName){
+						var helperCB = template.helpers[helperName];
+		
 
+						// So this is the magic fxn that rerenders our lil template in our HTML =-)
+						var callWrapper = function(/*args*/){
+								// This .apply // call
+								debugger;
+								var result = helperCB(arguments);
+								
+								/// for now we assume that there is only one value per template
+								// depencency / relationship
+
+								template.defaults[helperName] = result;
+								renderTemplate(template)
+						};
+
+						// We do this so we can tell if we should stop going up the caller chain					
+						callWrapper.__type__ = "templateMethod"
+						callWrapper.__unique_id__  = "" + Math.random() ;
+						// TODO: change these __ __ values to be prefaced with eChat
+
+						template.helpers[helperName] = callWrapper;
+						// Should not render until all are done rendering...
+						callWrapper();
+
+					})( template, helperName);
 					// No we can wrap this in a master call:
-
-
-					// So this is the magic fxn that rerenders our lil template in our HTML =-)
-					var callWrapper = function(/*args*/){
-							// This .apply // call
-							var result = helperCB(arguments);
-							
-							/// for now we assume that there is only one value per template
-							// depencency / relationship
-
-							template.defaults[helperName] = result;
-							renderTemplate(template)
-					};
-
-					// We do this so we can tell if we should stop going up the caller chain					
-					callWrapper.__type__ = "templateMethod"
-					callWrapper.__unique_id__  = "" + Math.random() ;
-					// TODO: change these __ __ values to be prefaced with eChat
-
-					template.helpers[helperName] = callWrapper;
-					// Should not render until all are done rendering...
-					callWrapper();
 
 			}
 		}
