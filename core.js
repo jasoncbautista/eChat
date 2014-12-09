@@ -189,18 +189,16 @@ eChat.Templates.ChatItem = {
 
 
 
-eChat.Core.Templitizer();
-
-
-
-
-
-
 var rr  = new  eChat.Core.RValue("Wassa");
 var rr2  = new eChat.Core.RValue("Weemee");
 
 
 var runner = function(){
+
+
+
+eChat.Core.Templitizer("start");
+
 
 
 
@@ -211,9 +209,9 @@ rr.set("yo yo yeedfdse")
 };
 
 
-
-runner();
-
+$(function(){
+	runner();
+});
 
 
 
