@@ -218,6 +218,26 @@ eChat.Templates.ChatItem = {
 };
 
 
+eChat.Templates.ChatItemDoubleTrouble = {
+	defaults: {
+		"defaultProp": "another template that depends on both reactive values"
+	},
+
+	"el": ".someElDouble", // fix this context 
+	// TODO: we want to use regex to get this since it can take this / args
+	"templateStr": "<div> <h1> Wassa <%=defaultProp%> </h1>   <div> <%= getSomeValue %>  </div> ",
+	helpers: {
+		"getSomeValue":  function(){
+			console.log('rget', rr.get());
+
+			return rr.get() + " " + rr2.get();
+	}
+
+	}	
+
+};
+
+
 // Define our reactive values and init our core:
 var rr  = new  eChat.Core.RValue("Wassa");
 var rr2  = new eChat.Core.RValue("Weemee");
