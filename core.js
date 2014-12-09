@@ -5,7 +5,6 @@ var eChat = echat || { Core{}, state:{ entities:{}, fxns: {}}};
 // TODO: with a promise
 eChat.Core.sendMsg = function(msg, cbError){
 	// We send a simple msg to the server and get called if we error
-
 	///
 };
 
@@ -22,7 +21,6 @@ eChat.Core.RValue = function(initialValue){
 
 			debugger;
 			return _initialValue;
-
 		}
 	};
 };
@@ -30,15 +28,17 @@ eChat.Core.RValue = function(initialValue){
 eChat.Core.sendMsg()
 
 
-
 var rr  = new  eChat.Core.RValue("wassa");
 
 var callBackForHTMLValue = function(){
+	console.log('rget' rr.get());
 	return rr.get();
 };
 
 
 
+
+callBackForHTMLValue();
 
 
 
