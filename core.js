@@ -124,8 +124,19 @@ eChat.Templates = {};
 
 eChat.Core.Templitizer  = function(){
 
+	var renderTemplate = function(template){
+
+		var templateStr = template.templateStr;
+
+		// TODO: reuse template str:
+		var htmlStr = _.template(templateStr)(template.defaults  );
+
+		$(template.el).html(  $(htmlStr));
+		
+	};
+
 	var templitize = function(template){
-			// We need to turn them into nice little tempaltes:
+			// We need to turn them into nice little templates:
 		
 		// We make the template be recognized as a template:
 		template.__type__ = "template";
@@ -140,7 +151,7 @@ eChat.Core.Templitizer  = function(){
 					// No we can wrap this in a master call:
 
 
-					// So this is the magic fxn that rerenders our lil tempalte in our HTML =-)
+					// So this is the magic fxn that rerenders our lil template in our HTML =-)
 					var callWrapper = function(/*args*/){
 							// This .apply // call
 							var result = helperCB(arguments);
@@ -148,6 +159,8 @@ eChat.Core.Templitizer  = function(){
 							/// for now we assume that there is only one value per template
 							// depencency / relationship
 
+							template.defaults[helperName] = result;
+							renderTemplate(template)
 					};
 
 					// We do this so we can tell if we should stop going up the caller chain					
@@ -156,25 +169,35 @@ eChat.Core.Templitizer  = function(){
 					// TODO: change these __ __ values to be prefaced with eChat
 
 					template.helpers[helperName] = callWrapper;
-
+					callWrapper();
 
 			}
 		}
 	};
 
 	for(var templateName in eChat.Templates){
-			templitize(eChat.Templates[templateName]);
+			var template = eChat.Templates[templateName];
+			templitize(template);
 
+			// Render the template
+
+			renderTemplate(template);
+			
 	}
+
 
 };
 
 
 
 eChat.Templates.ChatItem = {
-	"el": ".someEl",
+	defaults: {
+		"defaultProp": "one"
+	},
+
+	"el": ".someEl", // fix this context 
 	// TODO: we want to use regex to get this since it can take this / args
-	"templateStr": "<div> <h1> Wassa </h1>   <div> {{{getSomeValue}}} </div>",
+	"templateStr": "<div> <h1> Wassa <%=defaultProp%> </h1>   <div> <%= getSomeValue %> </div>",
 	helpers: {
 		"getSomeValue":  function(){
 			console.log('rget', rr.get());
