@@ -130,10 +130,8 @@ eChat.Templates = {};
 
 eChat.Core.Templitizer  = function(){
 
-	for(var templateName in eChat.Templates){
-		// We need to turn them into nice little tempaltes:
-
-		var template = eChat.Templates[templateName];		
+	var templitize = function(template){
+			// We need to turn them into nice little tempaltes:
 		
 		// We make the template be recognized as a template:
 		template.__type__ = "template";
@@ -149,7 +147,10 @@ eChat.Core.Templitizer  = function(){
 
 					var callWrapper = function(/*args*/){
 							// This .apply // call
-							helperCB(arguments);
+							var result = helperCB(arguments);
+							
+							/// for now we assume that there is only one value per template
+							// depencency / relationship
 
 					};
 
@@ -163,6 +164,10 @@ eChat.Core.Templitizer  = function(){
 
 			}
 		}
+	};
+
+	for(var templateName in eChat.Templates){
+			templitize(eChat.Templates[templateName]);
 
 	}
 
@@ -188,6 +193,8 @@ eChat.Core.Templitizer();
 
 
 eChat.Templates.ChatItem.helpers.getSomeValue({});
+rr.set("yo yo yeee")
 
+rr.set("yo yo yeedfdse")
 
 /// TODO: latency compensation
