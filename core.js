@@ -119,11 +119,6 @@ eChat.Core.sendMsg()
 
 var rr  = new  eChat.Core.RValue("wassa");
 
-var callBackForHTMLValue = function(){
-	console.log('rget', rr.get());
-	return rr.get();
-};
-
 
 eChat.Templates = {};
 
@@ -145,6 +140,8 @@ eChat.Core.Templitizer  = function(){
 
 					// No we can wrap this in a master call:
 
+
+					// So this is the magic fxn that rerenders our lil tempalte in our HTML =-)
 					var callWrapper = function(/*args*/){
 							// This .apply // call
 							var result = helperCB(arguments);
@@ -177,7 +174,11 @@ eChat.Core.Templitizer  = function(){
 
 eChat.Templates.ChatItem = {
 	helpers: {
-		"getSomeValue": callBackForHTMLValue
+		"getSomeValue":  function(){
+			console.log('rget', rr.get());
+			return rr.get();
+	}
+
 	}	
 
 };
