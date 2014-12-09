@@ -144,6 +144,12 @@ eChat.Core.Templitizer  = function(){
 		// Check if helpers defined:
 		if( !(template.helpers == null) ) {
 
+			// Temp hack for now:
+			for(var helperName in template.helpers){
+					template.defaults[helperName] = "";
+		
+			}			
+
 			for(var helperName in template.helpers){
 					
 					var helperCB = template.helpers[helperName];
@@ -169,6 +175,7 @@ eChat.Core.Templitizer  = function(){
 					// TODO: change these __ __ values to be prefaced with eChat
 
 					template.helpers[helperName] = callWrapper;
+					// Should not render until all are done rendering...
 					callWrapper();
 
 			}
@@ -197,11 +204,15 @@ eChat.Templates.ChatItem = {
 
 	"el": ".someEl", // fix this context 
 	// TODO: we want to use regex to get this since it can take this / args
-	"templateStr": "<div> <h1> Wassa <%=defaultProp%> </h1>   <div> <%= getSomeValue %> </div>",
+	"templateStr": "<div> <h1> Wassa <%=defaultProp%> </h1>   <div> <%= getSomeValue %>  </div> <h2> <%= getSomeValueTwo %> </h2>",
 	helpers: {
 		"getSomeValue":  function(){
 			console.log('rget', rr.get());
 			return rr.get();
+	},
+	"getSomeValueTwo":  function(){
+			//console.log('rget', rr2.get());
+			return rr2.get();
 	}
 
 	}	
