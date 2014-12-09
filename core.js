@@ -160,7 +160,6 @@ eChat.Core.Templitizer  = function(){
 						// So this is the magic fxn that rerenders our lil template in our HTML =-)
 						var callWrapper = function(/*args*/){
 								// This .apply // call
-								debugger;
 								var result = helperCB(arguments);
 								
 								/// for now we assume that there is only one value per template
@@ -191,14 +190,9 @@ eChat.Core.Templitizer  = function(){
 			templitize(template);
 
 			// Render the template
-
 			renderTemplate(template);
-			
 	}
-
-
 };
-
 
 
 eChat.Templates.ChatItemOne = {
