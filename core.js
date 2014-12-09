@@ -220,7 +220,7 @@ eChat.Templates.ChatItem = {
 
 eChat.Templates.ChatItemDoubleTrouble = {
 	defaults: {
-		"defaultProp": "another template that depends on both reactive values"
+		"defaultProp": "another template that depends on both reactive values in one fxn"
 	},
 
 	"el": ".someElDouble", // fix this context 
