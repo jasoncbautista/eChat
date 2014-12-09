@@ -72,9 +72,13 @@ eChat.Core.RValue = function(initialValue){
 	};
 
 	var notifyListeners = function(){
-		for(var listenerName in eChat.State.rValues.fxn){
 
-				var listener = eChat.State.rValues.fxn[listenerName];
+		// TODO: make sure we still exist..
+
+		// TODO: cleanup????? 
+		for(var listenerName in eChat.State.rValues[ourId].fxns){
+
+				var listener = eChat.State.rValues[ourId].fxns[listenerName];
 				listener();
 		}
 	};
