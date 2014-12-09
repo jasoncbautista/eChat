@@ -1,15 +1,12 @@
-
 // Very simple chat js system
 var eChat = eChat || { Core:{}, State:{rValues: {}, entities:{} }};
 eChat.debugMode = true;
 
 eChat.debug = function(val, val2){
-
 	// if arguments length
 	console.log(val);
 	console.log(val2);
 }
-
 
 // TODO: with a promise
 eChat.Core.sendMsg = function(msg, cbError){
@@ -19,15 +16,12 @@ eChat.Core.sendMsg = function(msg, cbError){
 
 // Very simple Reactive Values:
 eChat.Core.RValue = function(initialValue){
-
 	var _initialValue = initialValue;
 
 	// Tracking id to update listener on this RValue:
 	var ourId = "" +  Math.random();
 
-
 	//TODO: call a registerFXN instead
-
 	eChat.State.rValues[ourId] = {fxns: {} };
 
 	// Make privates:
@@ -38,7 +32,6 @@ eChat.Core.RValue = function(initialValue){
 		// We are doing to find out who is sepending on us:
 		while(true){
 			var callerParent = prevCallerParent.caller;
-
 		
 			if(callerParent == null){
 				eChat.debug("wtf callerParent null");
@@ -47,19 +40,15 @@ eChat.Core.RValue = function(initialValue){
 
 			// Eventually can be a "renderFXn" intead of templateMethod 
 			if(callerParent == null ){
-				break;
-				return // throw error
+				break; // throw an error
 			}
 
 			if(callerParent.__type__ === "templateMethod"){
 
 				// yay, we can register our selves to rerender this fxn:
-
 				// Maybe here we should use calleOrigin (first step)... since this is what we will call again:
 				eChat.State.rValues[ourId].fxns[callerParent.__unique_id__] = callerParent;  
 				break;
-
-				return;
 
 				// we shoudla saved the args too?
 			
@@ -74,7 +63,6 @@ eChat.Core.RValue = function(initialValue){
 	var notifyListeners = function(){
 
 		// TODO: make sure we still exist..
-
 		// TODO: cleanup????? 
 		for(var listenerName in eChat.State.rValues[ourId].fxns){
 
@@ -88,8 +76,7 @@ eChat.Core.RValue = function(initialValue){
 		set: function(_value){
 			// TODO: XXX: only throw an event if the new value is diff 
 			// than the last =-)
-
-			// don't check the object to be exactly the same though... 
+			// ALSO: don't check the object to be exactly the same though... 
 			// just equal per values
 
 
@@ -115,12 +102,7 @@ eChat.Core.RValue = function(initialValue){
 };
 
 eChat.Core.sendMsg()
-
-
-
-
 eChat.Templates = {};
-
 
 eChat.Core.Templitizer  = function(){
 
@@ -217,11 +199,6 @@ eChat.Templates.ChatItemOne = {
 
 };
 
-
-
-
-
-
 eChat.Templates.ChatItem = {
 	defaults: {
 		"defaultProp": "another template"
@@ -241,26 +218,17 @@ eChat.Templates.ChatItem = {
 };
 
 
-
-
-
+// Define our reactive values and init our core:
 var rr  = new  eChat.Core.RValue("Wassa");
 var rr2  = new eChat.Core.RValue("Weemee");
-
+eChat.Core.Templitizer("start");
 
 var runner = function(){
 
+	eChat.Templates.ChatItem.helpers.getSomeValue({});
+	rr.set("yo yo yeee")
+	rr.set("yo yo yeedfdse")
 
-
-eChat.Core.Templitizer("start");
-
-
-
-
-eChat.Templates.ChatItem.helpers.getSomeValue({});
-rr.set("yo yo yeee")
-
-rr.set("yo yo yeedfdse")
 };
 
 
