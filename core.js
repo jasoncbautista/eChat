@@ -201,7 +201,7 @@ eChat.Core.Templitizer  = function(){
 
 
 
-eChat.Templates.ChatItem = {
+eChat.Templates.ChatItemOne = {
 	defaults: {
 		"defaultProp": "one"
 	},
@@ -217,6 +217,29 @@ eChat.Templates.ChatItem = {
 	"getSomeValueTwo":  function(){
 			//console.log('rget', rr2.get());
 			return rr2.get();
+	}
+
+	}	
+
+};
+
+
+
+
+
+
+eChat.Templates.ChatItem = {
+	defaults: {
+		"defaultProp": "another template"
+	},
+
+	"el": ".someElTwo", // fix this context 
+	// TODO: we want to use regex to get this since it can take this / args
+	"templateStr": "<div> <h1> Wassa <%=defaultProp%> </h1>   <div> <%= getSomeValue %>  </div> ",
+	helpers: {
+		"getSomeValue":  function(){
+			console.log('rget', rr.get());
+			return rr.get() + " =-)";
 	}
 
 	}	
