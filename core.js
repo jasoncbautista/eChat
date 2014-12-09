@@ -117,7 +117,6 @@ eChat.Core.RValue = function(initialValue){
 eChat.Core.sendMsg()
 
 
-var rr  = new  eChat.Core.RValue("wassa");
 
 
 eChat.Templates = {};
@@ -197,9 +196,11 @@ eChat.Core.Templitizer();
 
 
 
+var rr  = new  eChat.Core.RValue("Wassa");
+var rr2  = new eChat.Core.RValue("Weemee");
+
 
 var runner = function(){
-
 
 
 
