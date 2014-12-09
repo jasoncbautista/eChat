@@ -1,6 +1,6 @@
 
 // Very simple chat js system
-var eChat = echat || { Core{}, state:{ entities:{}, fxns: {}}};
+var eChat = eChat || { Core:{}, state:{ entities:{}, fxns: {}}};
 
 // TODO: with a promise
 eChat.Core.sendMsg = function(msg, cbError){
@@ -19,6 +19,7 @@ eChat.Core.RValue = function(initialValue){
 
 		get: function(){
 
+			// arguments.callee.caller
 			debugger;
 			return _initialValue;
 		}
@@ -31,14 +32,71 @@ eChat.Core.sendMsg()
 var rr  = new  eChat.Core.RValue("wassa");
 
 var callBackForHTMLValue = function(){
-	console.log('rget' rr.get());
+	console.log('rget', rr.get());
 	return rr.get();
+};
+
+
+eChat.Templates = {};
+
+
+eChat.Core.Templitizer  = function(){
+
+	for(var templateName in eChat.Templates){
+		// We need to turn them into nice little tempaltes:
+
+		var template = eChat.Templates[templateName];		
+		
+		// We make the template be recognized as a template:
+		template.__type__ = "template";
+
+		// Check if helpers defined:
+		if( !(template.helpers == null) ) {
+
+			for(var helperName in template.helpers){
+					
+					var helperCB = template.helpers[helperName];
+
+					// No we can wrap this in a master call:
+
+					var callWrapper = function(/*args*/){
+							// This .apply // call
+							helperCB(arguments);
+
+					};
+
+					// We do this so we can tell if we should stop going up the caller chain					
+					callWrapper.__type__ = "templateMethod"
+					template.helpers[helperName] = callWrapper;
+
+
+			}
+		}
+
+	}
+
+};
+
+
+
+eChat.Template.ChatItem = {
+	helpers: {
+		"getSomeValue": callBackForHTMLValue
+	}	
+
 };
 
 
 
 
-callBackForHTMLValue();
 
+
+echo.Templitizer();
+
+
+
+
+
+eChat.Template.ChatItem.helpers.getSomeValue({});
 
 
