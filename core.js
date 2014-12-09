@@ -247,7 +247,7 @@ var runner = function(){
 
 	eChat.Templates.ChatItem.helpers.getSomeValue({});
 	rr.set("yo yo yeee")
-	rr.set("yo yo yeedfdse")
+	rr.set("yo")
 
 };
 
