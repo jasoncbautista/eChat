@@ -79,7 +79,7 @@ eChat.Core.Templitizer  = function(){
 
 
 
-eChat.Template.ChatItem = {
+eChat.Templates.ChatItem = {
 	helpers: {
 		"getSomeValue": callBackForHTMLValue
 	}	
@@ -90,13 +90,12 @@ eChat.Template.ChatItem = {
 
 
 
-
-echo.Templitizer();
-
+eChat.Core.Templitizer();
 
 
 
 
-eChat.Template.ChatItem.helpers.getSomeValue({});
+
+eChat.Templates.ChatItem.helpers.getSomeValue({});
 
 
