@@ -173,6 +173,9 @@ eChat.Core.Templitizer  = function(){
 
 
 eChat.Templates.ChatItem = {
+	"el": ".someEl",
+	// TODO: we want to use regex to get this since it can take this / args
+	"templateStr": "<div> <h1> Wassa </h1>   <div> {{{getSomeValue}}} </div>",
 	helpers: {
 		"getSomeValue":  function(){
 			console.log('rget', rr.get());
@@ -193,9 +196,24 @@ eChat.Core.Templitizer();
 
 
 
+
+
+var runner = function(){
+
+
+
+
 eChat.Templates.ChatItem.helpers.getSomeValue({});
 rr.set("yo yo yeee")
 
 rr.set("yo yo yeedfdse")
+};
+
+
+
+runner();
+
+
+
 
 /// TODO: latency compensation
