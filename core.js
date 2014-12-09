@@ -31,6 +31,11 @@ eChat.Core.RValue = function(initialValue){
 			var callerParent = prevCallerParent.caller;
 
 
+
+			if(callerParent == null){
+				break;
+			}
+
 			// Eventually can be a "renderFXn" intead of templateMethod 
 			if(callerParent == null ){
 				break;
@@ -43,13 +48,14 @@ eChat.Core.RValue = function(initialValue){
 
 				// Maybe here we should use calleOrigin (first step)... since this is what we will call again:
 				eChat.State.rValues[ourId].fxns[callerParent.__unique_id__] = callerParent;  
+				break;
 
+				return;
 
 				// we shoudla saved the args too?
 			
 			}
 		}
-
 
 	};
 
@@ -69,6 +75,11 @@ eChat.Core.RValue = function(initialValue){
 
 			// don't check the object to be exactly the same though... 
 			// just equal per values
+
+
+			if(_initialValue === value) {
+				return;
+			}
 
 			_initialValue = _value;
 
