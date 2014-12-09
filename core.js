@@ -89,7 +89,7 @@ eChat.Core.RValue = function(initialValue){
 			// just equal per values
 
 
-			if(_initialValue === value) {
+			if(_initialValue === _value) {
 				return;
 			}
 
@@ -105,7 +105,6 @@ eChat.Core.RValue = function(initialValue){
 
 			registerCallers({args: arguments});
 			// arguments.callee.caller
-			debugger;
 			return _initialValue;
 		}
 	};
