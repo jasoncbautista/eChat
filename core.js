@@ -1,6 +1,15 @@
 
 // Very simple chat js system
 var eChat = eChat || { Core:{}, State:{rValues: {}, entities:{} }};
+eChat.debugMode = true;
+
+eChat.debug = function(val, val2){
+
+	// if arguments length
+	console.log(val);
+	console.log(val2);
+}
+
 
 // TODO: with a promise
 eChat.Core.sendMsg = function(msg, cbError){
@@ -30,9 +39,9 @@ eChat.Core.RValue = function(initialValue){
 		while(true){
 			var callerParent = prevCallerParent.caller;
 
-
-
+		
 			if(callerParent == null){
+				eChat.debug("wtf callerParent null");
 				break;
 			}
 
@@ -55,6 +64,9 @@ eChat.Core.RValue = function(initialValue){
 				// we shoudla saved the args too?
 			
 			}
+
+			// Walk the pointer:
+			prevCallerParent = callerParent;
 		}
 
 	};
