@@ -12,6 +12,12 @@ eChat.debug = function(val, val2){
 eChat.Core.sendMsg = function(msg, cbError){
 	// We send a simple msg to the server and get called if we error
 	///
+
+	var xmlhttp = new XMLHttpRequest();	
+	xmlhttp.open("GET","/api?msg=" + JSON.stringify(msg) ,true);
+	xmlhttp.send();
+	// Clean up?
+	
 };
 
 // Very simple Reactive Values:
